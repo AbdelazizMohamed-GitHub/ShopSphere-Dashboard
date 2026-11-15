@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_sphere_dashboard/core/theme/app_color.dart';
+import 'package:shop_sphere_dashboard/core/theme/app_styles.dart';
+import 'package:shop_sphere_dashboard/core/app/app_data.dart';
+import 'package:shop_sphere_dashboard/features/analytics/presention/contoller/cubit/analytics_cubit.dart';
+
+class CustomTimeRange extends StatelessWidget {
+  const CustomTimeRange({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      itemCount: timeRange.length,
+      separatorBuilder: (BuildContext context, int index) {
+        return const SizedBox(width: 10);
+      },
+      itemBuilder: (BuildContext context, int index) {
+        return BlocBuilder<AnalyticsCubit, AnalyticsState>(
+          builder: (context, state) {
+            return InkWell(
+              onTap: () async {
+                // Update the time range index in the AnalyticsCubit
+                await context.read<AnalyticsCubit>().setTimeRangeIndex(index);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: context.read<AnalyticsCubit>().timeRangeIndex == index
+                      ? AppColors.primaryColor
+                      : Colors.white,
+                ),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
+                  "${timeRange[index]}",
+                  style: context.read<AnalyticsCubit>().timeRangeIndex == index
+                      ? AppStyles.text16Regular.copyWith(color: Colors.white)
+                      : AppStyles.text16Regular,
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}

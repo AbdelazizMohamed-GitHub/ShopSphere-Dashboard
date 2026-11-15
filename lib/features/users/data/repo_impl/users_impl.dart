@@ -1,0 +1,61 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
+import 'package:shop_sphere_dashboard/core/errors/fairebase_failure.dart';
+import 'package:shop_sphere_dashboard/core/service/firestore_service.dart';
+import 'package:shop_sphere_dashboard/features/auth/domain/entity/user_entity.dart';
+import 'package:shop_sphere_dashboard/features/users/domain/repo/users_repo.dart';
+import 'package:shop_sphere_dashboard/features/products/domain/entity/proudct_entity.dart';
+
+class UsersRepoImpl extends UsersRepo {
+  final FirestoreService firestoreService;
+  UsersRepoImpl({required this.firestoreService});
+  @override
+  Future<Either<FirebaseFailure, List<UserEntity>>> getUsers({
+    required bool isStaff,
+  }) async {
+    try {
+      List<UserEntity> users = await firestoreService.getUsers(
+        isStaff: isStaff,
+      );
+      return Right(users);
+    } on FirebaseException catch (e) {
+      return Left(FirebaseFailure.fromCode(e.code));
+    } catch (e) {
+      return Left(FirebaseFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<FirebaseFailure, List<ProductEntity>>> getStaffProducts({
+    required String staffId,
+  }) async {
+    try {
+      var data = await firestoreService.getStaffProducts(staffId: staffId);
+      return right(data);
+    } on FirebaseException catch (e) {
+      return Left(FirebaseFailure.fromCode(e.code));
+    } catch (e) {
+      return Left(FirebaseFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<void> deleteUser({required String userId}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<FirebaseFailure, void>> changeUserRule({
+    required String userId,
+    required bool isStaff,
+  }) async {
+    try {
+      await firestoreService.changeUserRule(userId: userId, isStaff: isStaff);
+      return right(null);
+    } on FirebaseException catch (e) {
+      return Left(FirebaseFailure.fromCode(e.code));
+    } catch (e) {
+      return Left(FirebaseFailure(message: e.toString()));
+    }
+  }
+}
