@@ -16,31 +16,35 @@ A Flutter admin dashboard for the ShopSphere e-commerce store. It runs on web, A
 
 ### Products
 
-![Products](screenshots/products.png)
+![Products](screenshots/Products.png)
 
 ### Edit Product
 
-![Edit Product](screenshots/edit-product.png)
+![Edit Product](screenshots/Edit-Product.png)
 
 ### Orders
 
-![Orders](screenshots/orders.png)
+![Orders](screenshots/Orders.png)
 
 ### Order Details
 
-![Order Details](screenshots/order-details.png)
+![Order Details](screenshots/Order-Details.png)
 
 ### Analytics
 
-![Analytics](screenshots/analytics.png)
+![Analytics](screenshots/Analytics.png)
 
 ### Users
 
-![Users](screenshots/users.png)
+![Users](screenshots/Users.png)
+
+### AddNotification
+
+![AddNotification](screenshots/Add-Notification.png)
 
 ## Tech Stack
 
-- Flutter (Dart SDK `3.47.7`)
+- Flutter (Dart SDK `^3.47.7`)
 - State management: `flutter_bloc` (Cubit)
 - Routing: `go_router`
 - Dependency injection: `get_it`
