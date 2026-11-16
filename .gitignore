@@ -57,3 +57,4 @@ assets/firebase_service_account.json
 .flutter-plugins-dependencies
 build/
 lib/core/app/app_keys.dart
+
