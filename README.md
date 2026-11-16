@@ -28,7 +28,7 @@ A Flutter admin dashboard for the ShopSphere e-commerce store. It runs on web, A
 
 ### Order Details
 
-![Order Details](screenshots/Order-Details.png)
+![Order Details](screenshots/Order-Detials.png)
 
 ### Analytics
 
